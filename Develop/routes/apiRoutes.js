@@ -1,23 +1,24 @@
-const db = require("../db/db.json");
+const {v4:uuidv4} = require("uuid");
+const db = require("../db/db");
 const fs = require("fs");
-const uuid = require("uuid/v4");
+
 
 
 module.exports=function(app){
-    let noteID = uuid()
+    let noteID = uuidv4()
 
     app.post("/api/notes", function(req, res) {
         let newNote = {
-            ID: noteID,
+            
             title: req.body.title,
-            text: req.body.text
-        };
+            text: req.body.text,
+            id:uuidv4()};
         db.push(newNote);
         fs.writeFileSync("db/db.json", JSON.stringify(db),"utf-8");
         res.json(db);
 
     app.get("/api/notes", function(req, res) {
-        var notes = fs.readFileSync("db/db.json", JSON.stringify(db),"utf-8");
+        var notes = fs.readFileSync("db/db.json", "utf-8");
         var temp = JSON.parse(notes)
         res.json(temp);
       });
