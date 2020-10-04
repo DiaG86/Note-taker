@@ -1,9 +1,9 @@
-const express = require('express');
-const htmlRoutes = require('./routes/htmlRoutes')
+var express = require("express");
+var htmlRoutes = require("./routes/htmlRoutes")
 
 
-const app = express();
-const PORT = 3000;
+var app = express();
+var PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
